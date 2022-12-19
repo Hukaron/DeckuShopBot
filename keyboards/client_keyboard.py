@@ -3,8 +3,10 @@ from aiogram.types import ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButt
 b1=KeyboardButton('Режим работы')
 b2=KeyboardButton('Доставка')
 b3=KeyboardButton('Каталог')
-b4=KeyboardButton('/Связаться_со_мной', request_contact=True)
-b5=KeyboardButton('/Узнать_где_я', request_location=True)
+b4=KeyboardButton('Показать корзину')
+b5=KeyboardButton('Оформить заказ')
+b6=KeyboardButton('Показать корзину')
+b7=KeyboardButton('Показать мои заказы')
 
 
 # resize_keyboard делает клавиатуру меньше,
@@ -12,7 +14,7 @@ b5=KeyboardButton('/Узнать_где_я', request_location=True)
 kb_client=ReplyKeyboardMarkup(resize_keyboard=True)
 # Метод add просто добавляет кнопку в новую строку. 
 # insert добавляет в новый столбец
-client_keyboard=kb_client.add(b3).add(b1).insert(b2).add(b4).insert(b5)
+client_keyboard=kb_client.add(b3).add(b6).add(b2).insert(b1).add(b5).insert(b7)
 
 # Добавление кнопок в строку
 #kb_client.row(b1,b2,b3)

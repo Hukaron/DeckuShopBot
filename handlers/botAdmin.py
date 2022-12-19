@@ -4,7 +4,7 @@ from aiogram import types, Dispatcher
 from botCreate import dp, bot
 from aiogram.dispatcher.filters import Text
 from config import Admin_id
-from database import sqlite_db
+from database import sqlite_db as db
 from keyboards import admin_keyboard, client_keyboard
 
 
@@ -105,9 +105,18 @@ async def load_price(message: types.Message, state=FSMContext):
 async def load_amount(message: types.Message, state=FSMContext):
     if (message.chat.id in Admin_id):
         if message.text.isdigit():
+            photo=await db.sql_find_photo(state)
+            print("photo= "+str(photo))
+            print("photo[0]= "+str(photo[0]))
+            print("photo[0][0]= "+str(photo[0][0]))
             amount=int(message.text)
             for i in range(amount):
-                await sqlite_db.sql_add_clothes(state)
+                if str(photo).replace('[]','')!='':
+                    await db.sql_add_clothes(photo[0][0],state)
+                else:
+                    async with state.proxy() as data: 
+                        print(str(tuple(data.values())[0]))
+                        await db.sql_add_clothes(tuple(data.values())[0], state)
         else:
             print("Error message.text")
 
